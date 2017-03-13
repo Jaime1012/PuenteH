@@ -14,25 +14,23 @@ class MotorCtrl
         enum resultados {OK, TOOBIG, TOOSMALL};
         enum direccion {AVANZA, RETROCEDE, ND};
 
-        MotorCtrl(int pinPWM, int pinDIRECTION1, int pinDIRECTION2 = -1);
+        MotorCtrl(int pinPWM, int pinDIRECTION); 
         ~MotorCtrl();
         resultados setSpeed(int pwm);
         void stop();
-        void setDirection(direccion dir);
+        void setDirection(direccion);
         void initMotor();
         void setOffset(int offset);
         int getOffset();
-        void setConstants(int max, int min, int start);
-        direccion getDirection();
+ 
 
     private:
-        int MAX_PWM;
-        int MIN_PWM;
-        int START_PWM;
+        static const int MAX_PWM = 255;
+        static const int MIN_PWM = 26;
+        static const int START_PWM = 27;
 
         int _pinPWM; // pin de PWM
-        int _pinDIRECTION1; // primer pin de avance/retroceso
-        int _pinDIRECTION2; // segundo pin de avance/retroceso
+        int _pinDIRECTION; // primer pin de avance/retroceso
         int _maxPWM; // valor máximo permitido de PWM
         int _minPWM; // valor mínimo permitido de PWM (debajo de este valor no tiene efecto sobre el motor)
         int _startPWM; // valor necesario para movimiento de motor desde reposo
